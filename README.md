@@ -1,4 +1,10 @@
-# G32-GRE-Master
+# G33-GRE-Master
+
+### Feature Description
+
+* *Quiz Section:* Users will be able to take math and verbal quizzes.
+* *Daily Vocabulary Dose:* Users will recieve a notification with a new vocabulary word everyday if they want.
+* *Discussion Forum:* Users can be engaged in discussion of GRE related topics and inquiries.
 
 ### Expected Timeline
-![](gantt_chart.JPG)
+![Gantt Chart](gantt_chart.JPG)
