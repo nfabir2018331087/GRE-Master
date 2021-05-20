@@ -16,6 +16,7 @@ Report on Learning Pre-requisites
 
 SL | Learning Task | Description | Status | Comment |
 --:|:--------------|:------------|:------:|---------|
-1  | Java | Basics of Java | ![ ](https://img.shields.io/badge/Java%20Basics-Learned-green) | |
-2  | Android Studio  | Basics and In-depth | ![ ](https://img.shields.io/badge/Basics-May%2030-yellow) <br> ![ ](https://img.shields.io/badge/In--depth-June%2030-red)| |
-3  | Firebase |  |![ ](https://img.shields.io/badge/Firebase-June%2020-orange) | |
+1  | Java | Basic and Advance Java | ![ ](https://img.shields.io/badge/Basic-Learned-green) ![ ](https://img.shields.io/badge/Advance-Learning-blue) | |
+2  | Android Studio  | Features of Android Studio | ![ ](https://img.shields.io/badge/Android%20Studio-Learning-blue) | |
+3  | XML | Basic XML | ![ ](https://img.shields.io/badge/XML-June%2010-orange) | |
+4  | Firebase | Database and API |![ ](https://img.shields.io/badge/Firebase-June%2030-red) | |
