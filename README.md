@@ -16,4 +16,6 @@ Report on Learning Pre-requisites
 
 SL | Learning Task | Description | Status | Comment |
 --:|:--------------|:------------|:------:|---------|
-1  | Android Basics  | Basics of Android Studio | ![ ](https://img.shields.io/badge/Android%20Studio-May%2030-yellow) | |
+1  | Java | Basics of Java | ![ ](https://img.shields.io/badge/Java%20Basics-Learned-green) | |
+2  | Android Studio  | Basics and In-depth | ![ ](https://img.shields.io/badge/Basics-May%2030-yellow) <br> ![ ](https://img.shields.io/badge/In--depth-June%2030-red)| |
+3  | Firebase |  |![ ](https://img.shields.io/badge/Firebase-June%2020-orange) | |
