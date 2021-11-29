@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "632255189031",
+    "project_id": "gre-master-18666",
+    "storage_bucket": "gre-master-18666.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632255189031:android:dc44ba7dc5b9600b07fe02",
+        "android_client_info": {
+          "package_name": "com.example.gremaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632255189031-vcfmqesskjrkr0r28a2v1hkdhmkto8is.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2nhrT3DWlRR7iQyVrEzBBnUXN0kpqWjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632255189031-vcfmqesskjrkr0r28a2v1hkdhmkto8is.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
