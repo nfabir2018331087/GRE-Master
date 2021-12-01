@@ -7,7 +7,7 @@
     tools:context=".LoginActivity"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="#92F3CC"
+    android:background="#EDEDE9"
     >
 
 
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/teal_700"
+        android:backgroundTint="#937F7F"
         android:fontFamily="@font/balthazar"
         android:text="Sign Up"
         android:textAlignment="center"
