@@ -8,4 +8,5 @@
     <string name="tologin">Already has an account?</string>
     <string name="expert">Are you an expert in GRE?</string>
     <string name="singup"><u>SignUP</u></string>
+    <string name="article">Some Important Articles:</string>
 </resources>

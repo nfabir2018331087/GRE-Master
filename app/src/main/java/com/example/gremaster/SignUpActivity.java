@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
         if (!radioButton1.isChecked()&&!radioButton2.isChecked()) {
-            Toast.makeText(this, "One field is empty! Select any option", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "One field is empty! Select any option", Toast.LENGTH_SHORT).show();
             radioGroup.requestFocus();
             return;
         }
@@ -106,17 +106,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            Toast.makeText(SignUpActivity.this,"Account created successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this,"Account created successfully", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
                             startActivity(intent);
                         } else {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                Toast.makeText(SignUpActivity.this, "You already have an account", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "You already have an account", Toast.LENGTH_LONG).show();
                                 Intent intent1 = new Intent(SignUpActivity.this, LoginActivity.class);
                                 startActivity(intent1);
                             }
                             else Toast.makeText(SignUpActivity.this,
-                                    "Error: "+task.getException().getMessage()+" Try Again!", Toast.LENGTH_SHORT).show();
+                                    "Error: "+task.getException().getMessage()+" Try Again!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
