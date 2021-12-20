@@ -9,4 +9,6 @@
     <string name="expert">Are you an expert in GRE?</string>
     <string name="singup"><u>SignUP</u></string>
     <string name="article">Some Important Articles:</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

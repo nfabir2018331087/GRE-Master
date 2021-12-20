@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/balthazar"
         android:text="@string/create"
         android:textAlignment="center"
@@ -27,11 +27,11 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/balthazar"
         android:text="@string/fillup"
         android:textAlignment="center"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -40,18 +40,39 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/balthazar"
         android:text="Name"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:padding="5dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:background="@drawable/custom"
         android:hint="Enter your name"
-        android:textSize="18sp"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/textViewUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/balthazar"
+        android:text="Username"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editTextUser"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:background="@drawable/custom"
+        android:hint="Enter a username"
+        android:textSize="15sp"
         />
 
     <TextView
@@ -61,16 +82,16 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/balthazar"
         android:text="Email"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:padding="5dp"
         android:background="@drawable/custom"
         android:hint="Enter an email address"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:ems="10"
         android:inputType="textEmailAddress"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -82,17 +103,16 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/balthazar"
         android:text="Password"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:padding="5dp"
         android:background="@drawable/custom"
         android:hint="Enter a password"
-        android:textSize="18sp"
-        android:height="80dp"
+        android:textSize="15sp"
         android:ems="10"
         android:inputType="textPassword"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -103,7 +123,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/balthazar"
         android:text="@string/expert"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"/>
 
     <RadioGroup
@@ -116,19 +136,19 @@
             android:id="@+id/radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
             android:fontFamily="@font/balthazar"
             android:text="Yes"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
             android:fontFamily="@font/balthazar"
             android:text="No"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
     </RadioGroup>
 
 
