@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GREMaster">
         <activity
+            android:name=".VocabularyQuiz"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
