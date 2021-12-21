@@ -1,13 +1,16 @@
 package com.example.gremaster;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
@@ -17,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,12 +32,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    final static int GALLERY_PICK = 1;
     String userId, email;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -42,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     FirebaseAuth mAuth;
     DatabaseReference reference;
+    StorageReference storageRef;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //FirebaseMessaging.getInstance().subscribeToTopic("Vocabulary");
 
         mAuth = FirebaseAuth.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference("profile images");
+        user = mAuth.getCurrentUser();
+        if(user!=null) userId = user.getUid();
+        reference = FirebaseDatabase.getInstance().getReference("users");
+
 
         loadData();
 
@@ -60,12 +76,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View navHeader = getLayoutInflater().inflate(R.layout.nav_header,navigationView);
         navName = (TextView) navHeader.findViewById(R.id.textView9);
         navStatus = (TextView) navHeader.findViewById(R.id.textView10);
-        navImage = navHeader.findViewById(R.id.navImage);
+        navImage =(ImageView) navHeader.findViewById(R.id.navImage);
 
         navImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent,GALLERY_PICK);
             }
         });
         navigationView.setNavigationItemSelectedListener(this);
@@ -81,7 +100,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null){
+            Uri imageUri = data.getData();
+            StorageReference filePath = storageRef.child(userId + ".jpg");
+            filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if(task.isSuccessful()){
+                        if(userId!=null){
+                            String url = "https://firebasestorage.googleapis.com/v0/b/gre-master-18666.appspot.com/o/profile%20images%2FHwzmde6MemNbRNeHmYjIVOmOVvr2.jpg?alt=media&token=14dad47d-043b-4c74-a7e2-8e13ee2f85fc";
+                            reference.child(userId).child("profileimage").setValue(url);
+                        }
+                    }
+                }
+            });
+
+        }
+    }
 
     protected void onStart() {
         super.onStart();
@@ -96,21 +135,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void loadData(){
-
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null) userId = user.getUid();
-
-        reference = FirebaseDatabase.getInstance().getReference("users");
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    String name = snapshot.child(userId).child("name").getValue(String.class);
-                    String expert = snapshot.child(userId).child("expert").getValue(String.class);
+                    if(userId!=null) {
+                        String name = snapshot.child(userId).child("name").getValue(String.class);
+                        String expert = snapshot.child(userId).child("expert").getValue(String.class);
+                        String image = snapshot.child(userId).child("profileimage").getValue(String.class);
 
-                    navName.setText(name);
-                    navStatus.setText("GRE Expert: "+expert);
+                        navName.setText(name);
+                        navStatus.setText("GRE Expert: " + expert);
+                        Picasso.get().load(image).placeholder(R.drawable.default2).into(navImage);
+                    }
                 }
             }
             @Override
@@ -131,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     public void quizButtonClicked(View view) {
         Intent intent = new Intent(MainActivity.this,VocabularyQuiz.class);
         startActivity(intent);
