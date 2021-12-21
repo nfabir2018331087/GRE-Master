@@ -131,4 +131,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    public void quizButtonClicked(View view) {
+        Intent intent = new Intent(MainActivity.this,VocabularyQuiz.class);
+        startActivity(intent);
+    }
 }
