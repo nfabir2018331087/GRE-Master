@@ -9,6 +9,30 @@
     <string name="expert">Are you an expert in GRE?</string>
     <string name="singup"><u>SignUP</u></string>
     <string name="article">Some Important Articles:</string>
+    <string name="quiz">Wanna try yourself out? \nHere are some quiz for you.</string>
+    <string name="voc">Vocabulary \nQuiz</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    
+     <string name="RadioButtonQuestionOneOptionOne">Corresponding or agreeing</string>
+    <string name="RadioButtonQuestionOneOptionTwo">impracticable</string>
+    <string name="RadioButtonQuestionOneOptionThree">An amount that is extra</string>
+
+    <string name="RadioButtonQuestionTwoOptionOne">Having no definite shape</string>
+    <string name="RadioButtonQuestionTwoOptionTwo">Aware of something</string>
+    <string name="RadioButtonQuestionTwoOptionThree">Capable of doing many things competently</string>
+
+    <string name="RadioButtonQuestionThreeOptionOne">A preliminary explanation</string>
+    <string name="RadioButtonQuestionThreeOptionTwo">To prevent from doing</string>
+    <string name="RadioButtonQuestionThreeOptionThree">Suitable</string>
+
+    <string name="RadioButtonQuestionFourOptionOne">Impracticable</string>
+    <string name="RadioButtonQuestionFourOptionTwo">Raise in rank</string>
+    <string name="RadioButtonQuestionFourOptionThree">To hide something</string>
+
+    <string name="Typehere">Type Your Answer Here in Small Letter</string>
+
+    <string name="RadioButtonQuestionFiveOptionOne">A solitary person</string>
+    <string name="RadioButtonQuestionFiveOptionTwo">Harshly criticize someone</string>
+    <string name="RadioButtonQuestionFiveOptionThree">Restore to life</string>
 </resources>
