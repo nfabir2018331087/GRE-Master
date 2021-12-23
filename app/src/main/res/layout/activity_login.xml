@@ -108,4 +108,28 @@
         android:textStyle="bold"
         />
 
+    <TextView
+        android:id="@+id/verMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="Can't verify your account?"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/resendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resend Email"
+        android:layout_gravity="center"
+        android:backgroundTint="#937F7F"
+        android:textAllCaps="false"
+        android:onClick="resendEmail"
+        android:visibility="gone"/>
+
+
 </LinearLayout>

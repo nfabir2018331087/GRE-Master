@@ -16,10 +16,13 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -134,10 +137,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            saveData();
-                            Toast.makeText(SignUpActivity.this,"Account created successfully", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
-                            startActivity(intent);
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if(user!=null) {
+                                user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(SignUpActivity.this, "Account created successfully" +
+                                                "\nVerification email has been sent", Toast.LENGTH_LONG).show();
+                                        saveData();
+                                        Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(SignUpActivity.this,e.getMessage() + "\nTry Again!", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
                         } else {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                                 Toast.makeText(SignUpActivity.this, "You already have an account", Toast.LENGTH_LONG).show();

@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Instrumentation;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -16,11 +17,13 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +44,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    boolean isVerified;
     final static int GALLERY_PICK = 1;
     String userId, email;
     DrawerLayout drawerLayout;
@@ -64,7 +68,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAuth = FirebaseAuth.getInstance();
         storageRef = FirebaseStorage.getInstance().getReference("profile images");
         user = mAuth.getCurrentUser();
-        if(user!=null) userId = user.getUid();
+        if(user!=null) {
+            userId = user.getUid();
+            isVerified = user.isEmailVerified();
+        }
         reference = FirebaseDatabase.getInstance().getReference("users");
 
 
@@ -106,16 +113,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null){
             Uri imageUri = data.getData();
-            StorageReference filePath = storageRef.child(userId + ".jpg");
-            filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            StorageReference filePath = storageRef.child(userId + "." + getFileExtension(imageUri));
+
+            filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    if(task.isSuccessful()){
-                        if(userId!=null){
-                            String url = "https://firebasestorage.googleapis.com/v0/b/gre-master-18666.appspot.com/o/profile%20images%2FHwzmde6MemNbRNeHmYjIVOmOVvr2.jpg?alt=media&token=14dad47d-043b-4c74-a7e2-8e13ee2f85fc";
-                            reference.child(userId).child("profileimage").setValue(url);
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            reference.child(userId).child("profileimage").setValue(uri.toString());
                         }
-                    }
+                    });
                 }
             });
 
@@ -124,9 +132,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if(currentUser==null)
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!=null) isVerified = user.isEmailVerified();
+        if(user==null || !isVerified)
         {
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
@@ -172,5 +180,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void quizButtonClicked(View view) {
         Intent intent = new Intent(MainActivity.this,VocabularyQuiz.class);
         startActivity(intent);
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cr.getType(uri));
     }
 }
