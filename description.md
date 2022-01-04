@@ -18,6 +18,8 @@ After creating an account users can find these features-
 
 * **Discussion forum:** Users can be engaged in discussion of GRE related topics and inquiries where GRE experts can answer their queries.
 
-Other than these features there is a leaderboard based on the quizzes.
+Other than these features there is a leaderboard based on the quizzes.  
+
+<img src="Leaderboard.jpg" width="200" height="400">
 
 Users can also find GRE related resoures from our app.
