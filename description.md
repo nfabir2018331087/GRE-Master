@@ -6,7 +6,9 @@ GRE Master is to help users to ease their road to GRE.
 
 Functionalities & Features
 --------------------------
-Users have to Create an account or Sign up to use the features of the app.
+Users have to Create an account or Sign up to use the features of the app. 
+
+<img src="Login.jpg" width="200" height="400"> <img src="SignUp.jpg" width="200" height="400">
 
 After creating an account users can find these features-
 * **Quizzer:** Users can take quizzes from here to testify themselves.
