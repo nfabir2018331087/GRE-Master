@@ -9,10 +9,24 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class VocabularyQuiz extends AppCompatActivity {
 
+    StoreData storeData;
     private ScrollView scroll;
     private RadioGroup radioGroupOne;
     private RadioGroup radioGroupTwo;
@@ -24,7 +38,10 @@ public class VocabularyQuiz extends AppCompatActivity {
     private RadioButton question3;
     private RadioButton question4;
     private RadioButton question5;
-    private int correctAnswers;
+    int correctAnswers;
+    DatabaseReference reference, quizRef;
+    FirebaseAuth mAuth;
+    String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,38 +62,34 @@ public class VocabularyQuiz extends AppCompatActivity {
         radioGroupFour = (RadioGroup) findViewById(R.id.radioGroupFour);
         radioGroupFive = (RadioGroup) findViewById(R.id.radioGroupFive);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null) currentUserID=mAuth.getCurrentUser().getUid();
+        reference = FirebaseDatabase.getInstance().getReference("users");
+        quizRef = FirebaseDatabase.getInstance().getReference("quiz marks");
+
     }
 
     public void SubmitResponse(View v) {
 
-        String wrongAnswers = "Check this question and try again :-\n";
         if (question1.isChecked()) {
             correctAnswers++;
-        } else {
-            wrongAnswers = wrongAnswers + "Question - 1\n";
         }
+
         if (question2.isChecked()) {
             correctAnswers++;
-        } else {
-            wrongAnswers = wrongAnswers + "Question - 2\n";
         }
+
         if (question3.isChecked()) {
             correctAnswers++;
-        } else {
-            wrongAnswers = wrongAnswers + "Question - 3\n";
         }
 
         if (question4.isChecked()) {
             correctAnswers++;
-        } else {
-            wrongAnswers = wrongAnswers + "Question - 4\n";
         }
-
 
         if (question5.isChecked()) {
             correctAnswers++;
-        } else {
-            wrongAnswers = wrongAnswers + "Question - 5\n";
         }
 
 
@@ -84,14 +97,39 @@ public class VocabularyQuiz extends AppCompatActivity {
         if (correctAnswers == 5) {
             Toast.makeText(this, "Congrats, All Answers are Correct  \n Thanks for attempting this Quiz ", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Correct Answers: " + correctAnswers + " /5\n" + wrongAnswers, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Correct Answers: " + correctAnswers + "/5", Toast.LENGTH_LONG).show();
         }
 
-        ResetQuiz(findViewById(R.id.all));
+        int marks = correctAnswers;
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    if(currentUserID!=null) {
+                        //Fetching data from users
+                        String name = dataSnapshot.child(currentUserID).child("name").getValue(String.class);
+                        String userDP = dataSnapshot.child(currentUserID).child("profileimage").getValue(String.class);
+
+                        QuizMarks quizMarks = new QuizMarks(name, userDP, marks);
+
+                        quizRef.child(currentUserID).setValue(quizMarks);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        ResetQuiz();
 
     }
 
-    public void ResetQuiz(View v) {
+    public void ResetQuiz() {
 
         correctAnswers = 0;
 

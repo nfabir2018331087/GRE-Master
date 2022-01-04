@@ -339,19 +339,6 @@
                 android:background="@color/black"
                 android:text="Submit" />
 
-            <Button
-
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:onClick="ResetQuiz"
-                android:textColor="@android:color/white"
-                android:layout_margin="20dp"
-                android:background="@color/black"
-                android:id="@+id/all"
-                android:text="Reset" />
 
         </LinearLayout>
     </LinearLayout>

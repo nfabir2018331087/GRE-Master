@@ -105,7 +105,6 @@ public class AddQuestion extends AppCompatActivity {
                     if(currentUserID!=null) {
                         //Fetching data from users
                         String name = dataSnapshot.child(currentUserID).child("name").getValue(String.class);
-                        //String username = dataSnapshot.child(currentUserID).child("username").getValue(String.class);
                         String userDP = dataSnapshot.child(currentUserID).child("profileimage").getValue(String.class);
                         Calendar calForDate = Calendar.getInstance();
                         SimpleDateFormat currentDate = new SimpleDateFormat("dd.MM.yy", Locale.US);

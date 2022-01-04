@@ -212,4 +212,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(getApplicationContext(),Forum.class);
         startActivity(intent);
     }
+
+    public void openLeaderboard(View view) {
+        Intent intent = new Intent(getApplicationContext(), Leaderboard.class);
+        startActivity(intent);
+    }
 }
