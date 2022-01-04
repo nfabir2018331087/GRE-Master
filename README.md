@@ -23,7 +23,10 @@ SL | Learning Task | Description | Status | Comment |
 
 Acknowledgement
 ----------------
-* 
+* **Anisul Islam** (*[Youtube playlist](https://www.youtube.com/playlist?list=PLgH5QX0i9K3p9xzYLFGdfYliIRBLVDRV5)*)  
+   Basic of Android Studio
+* **CodeWithHarry** (*[Youtube link](https://youtu.be/mXjZQX3UzOs)*)  
+   Basic of Android Studio
 
 Developers
 -----------
