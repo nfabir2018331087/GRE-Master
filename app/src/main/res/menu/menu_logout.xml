@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:title="Profile"
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_baseline_account_circle_24"/>
-    <item
-        android:title="Log Out"
-        android:id="@+id/logout"
-        android:icon="@drawable/ic_baseline_lock_open_24" />
+    <group
+        android:id="@+id/groupOfItem1">
+
+        <item
+            android:title="Home"
+            android:id="@+id/home"
+            android:icon="@drawable/ic_baseline_home_24"/>
+
+
+        <item
+            android:title="Profile"
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_baseline_account_circle_24"/>
+
+        <item
+            android:title="Settings"
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_baseline_settings_24"/>
+
+    </group>
+    <group
+        android:id="@+id/groupOfItem2">
+
+        <item
+            android:title="About"
+            android:id="@+id/about"
+            android:icon="@drawable/ic_baseline_info_24" />
+
+        <item
+            android:title="Share"
+            android:id="@+id/share"
+            android:icon="@drawable/ic_baseline_share_24" />
+
+        <item
+            android:title="Log Out"
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_baseline_lock_open_24" />
+
+    </group>
 </menu>

@@ -10,9 +10,11 @@
     <string name="singup"><u>Sign Up</u></string>
     <string name="article">Some Important Articles:</string>
     <string name="quiz">Wanna try yourself out? \nHere are some quiz for you.</string>
+    <string name="forum">Have some questions about GRE?\nJoin our Forum and have conversation with others.</string>
     <string name="voc">Vocabulary \nQuiz</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="forgot">Forgot Password?</string>
 
     <string name="RadioButtonQuestionOneOptionOne">Corresponding or agreeing</string>
     <string name="RadioButtonQuestionOneOptionTwo">impracticable</string>

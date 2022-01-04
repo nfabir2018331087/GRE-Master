@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="280dp"
     android:padding="10dp"
-    android:background="@color/cardview_dark_background"
+    android:background="@drawable/navhead"
     android:id="@+id/navHeaderId">
 
 
@@ -14,7 +14,7 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:elevation="20dp"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="40dp">
 
@@ -22,7 +22,8 @@
             android:id="@+id/navImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/default2"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -35,6 +36,7 @@
         android:fontFamily="@font/balthazar"
         android:gravity="center"
         android:textColor="@color/white"
+        android:text="Name"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -45,7 +47,8 @@
         android:fontFamily="@font/balthazar"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:text="Status"/>
 
 
 

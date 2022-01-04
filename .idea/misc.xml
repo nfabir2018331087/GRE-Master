@@ -9,18 +9,35 @@
         <entry key="..\:/G33-GRE-Master/app/src/main/res/layout/nav_header.xml" value="0.25" />
         <entry key="..\:/G33-GRE-Master/app/src/main/res/layout/splash_screen.xml" value="0.25" />
         <entry key="..\:/G33-GRE-Master/app/src/main/res/menu/menu_logout.xml" value="0.25" />
+        <entry key="..\:/GitTesting/app/src/main/res/drawable/border.xml" value="0.26614583333333336" />
+        <entry key="..\:/GitTesting/app/src/main/res/drawable/custom.xml" value="0.26614583333333336" />
+        <entry key="..\:/GitTesting/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.26614583333333336" />
+        <entry key="..\:/GitTesting/app/src/main/res/layout/activity_add_question.xml" value="0.25" />
+        <entry key="..\:/GitTesting/app/src/main/res/layout/activity_answers.xml" value="0.27447916666666666" />
+        <entry key="..\:/GitTesting/app/src/main/res/layout/activity_forum.xml" value="0.25" />
         <entry key="..\:/GitTesting/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/GitTesting/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/GitTesting/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/GitTesting/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/GitTesting/app/src/main/res/layout/activity_vocabulary_quiz.xml" value="0.25" />
+        <entry key="..\:/GitTesting/app/src/main/res/layout/design_answer.xml" value="0.264" />
+        <entry key="..\:/GitTesting/app/src/main/res/layout/design_question.xml" value="0.4" />
         <entry key="..\:/GitTesting/app/src/main/res/layout/nav_header.xml" value="0.25" />
         <entry key="..\:/GitTesting/app/src/main/res/layout/splash_screen.xml" value="0.25" />
         <entry key="..\:/GitTesting/app/src/main/res/menu/menu_logout.xml" value="0.25" />
+        <entry key="..\:/GitTesting/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
         <entry key="..\:/Project 250/app/src/main/res/drawable/custom.xml" value="0.26614583333333336" />
         <entry key="..\:/Project 250/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Project 250/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="..\:/Project 250/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Project 250/app/src/main/res/layout/splash_screen.xml" value="0.25" />
+        <entry key="..\:/Test/app/src/main/res/drawable/border.xml" value="0.26614583333333336" />
+        <entry key="..\:/Test/app/src/main/res/drawable/custom.xml" value="0.26614583333333336" />
+        <entry key="..\:/Test/app/src/main/res/layout/activity_answers.xml" value="0.25" />
+        <entry key="..\:/Test/app/src/main/res/layout/activity_forum.xml" value="0.264" />
+        <entry key="..\:/Test/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Test/app/src/main/res/layout/design_question.xml" value="0.25" />
+        <entry key="..\:/Test/app/src/main/res/layout/nav_header.xml" value="0.25" />
       </map>
     </option>
   </component>

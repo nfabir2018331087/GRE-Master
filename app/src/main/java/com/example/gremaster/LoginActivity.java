@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -123,8 +124,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                             }
                         }else
-                            Toast.makeText(LoginActivity.this, "LogIn Unsuccessful. " +
-                                    "Recheck your email and password", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "LogIn Unsuccessful.\n" +
+                                    task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -149,5 +150,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             });
         }
 
+    }
+
+    public void forgotPassLink(View view) {
+        String email = emailEditText.getText().toString();
+        if(!TextUtils.isEmpty(email)){
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(),"Reset link sent to "+emailEditText.getText().toString(),Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else{
+            emailEditText.setError("Please enter Email.");
+            emailEditText.requestFocus();
+        }
     }
 }

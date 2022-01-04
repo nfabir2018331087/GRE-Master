@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ShareCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Instrumentation;
@@ -12,16 +14,20 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -63,7 +69,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //FirebaseMessaging.getInstance().subscribeToTopic("Vocabulary");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.dark_teal, this.getTheme()));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.teal_700));
+        }
+
+        //Vocabulary notification send
+        FirebaseMessaging.getInstance().subscribeToTopic("Vocabulary")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Subscribed to daily vocabulary";
+                        if (!task.isSuccessful()) {
+                            msg = "Subscribing to daily vocabulary failed";
+                        }
+                    }
+                });
 
         mAuth = FirebaseAuth.getInstance();
         storageRef = FirebaseStorage.getInstance().getReference("profile images");
@@ -85,15 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navStatus = (TextView) navHeader.findViewById(R.id.textView10);
         navImage =(ImageView) navHeader.findViewById(R.id.navImage);
 
-        navImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent galleryIntent = new Intent();
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent,GALLERY_PICK);
-            }
-        });
         navigationView.setNavigationItemSelectedListener(this);
 
         //getSupportActionBar().hide();
@@ -105,29 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null){
-            Uri imageUri = data.getData();
-            StorageReference filePath = storageRef.child(userId + "." + getFileExtension(imageUri));
-
-            filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            reference.child(userId).child("profileimage").setValue(uri.toString());
-                        }
-                    });
-                }
-            });
-
-        }
     }
 
     protected void onStart() {
@@ -153,7 +143,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String image = snapshot.child(userId).child("profileimage").getValue(String.class);
 
                         navName.setText(name);
-                        navStatus.setText("GRE Expert: " + expert);
+                        if(expert.contains("Yes")) navStatus.setText("Expert");
+                        else navStatus.setText("Learner");
                         Picasso.get().load(image).placeholder(R.drawable.default2).into(navImage);
                     }
                 }
@@ -172,9 +163,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
-            return true;
         }
+        if(item.getItemId()==R.id.profile){
+            Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId()==R.id.home){
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(item.getItemId()==R.id.share){
+            onInviteClicked();
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onInviteClicked(){
+        Intent intent=new AppInviteInvitation.IntentBuilder("GRE Master Invite")
+                .setMessage("Prepare for GRE with GRE Master")
+                .setDeepLink(Uri.parse("http://google.com"))
+                .setCallToActionText("Invitation")
+                .build();
+        startActivityForResult(intent,100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100){
+            if(resultCode==RESULT_OK && data!=null){
+                String[] ids= AppInviteInvitation.getInvitationIds(resultCode,data);
+                for(String id:ids)
+                {
+                    Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     public void quizButtonClicked(View view) {
@@ -182,9 +208,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private String getFileExtension(Uri uri){
-        ContentResolver cr = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cr.getType(uri));
+    public void goToForum(View view) {
+        Intent intent = new Intent(getApplicationContext(),Forum.class);
+        startActivity(intent);
     }
 }

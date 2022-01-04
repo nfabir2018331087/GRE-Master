@@ -174,32 +174,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String name = nameText.getText().toString().trim();
         String username = userNameText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
+        String password = passEditText.getText().toString().trim();
         String expert = ((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString().trim();
 
         String userId = mAuth.getCurrentUser().getUid();
 
-        StoreData storeData = new StoreData(name,username,email,expert);
+        StoreData storeData = new StoreData(name,username,email,password,expert);
 
         reference.child(userId).setValue(storeData);
     }
 
-    /*public boolean checkValue(){
-        String username = userNameText.getText().toString().trim();
-        Query checkUser = databaseReference.orderByChild("username").equalTo(username);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                   x = true;
-                }
-                else x = false;
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return x;
-    }*/
 
 }

@@ -46,13 +46,13 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:padding="5dp"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:background="@drawable/custom"
+        android:ems="10"
         android:hint="Enter your name"
+        android:inputType="textPersonName"
+        android:padding="5dp"
         android:textSize="15sp"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textViewUser"
@@ -67,13 +67,13 @@
         android:id="@+id/editTextUser"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:padding="5dp"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:background="@drawable/custom"
+        android:ems="10"
         android:hint="Enter a username"
+        android:inputType="textPersonName"
+        android:padding="5dp"
         android:textSize="15sp"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView3"
