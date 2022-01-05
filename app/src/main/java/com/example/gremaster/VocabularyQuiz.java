@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+//vocabulary quiz page
 public class VocabularyQuiz extends AppCompatActivity {
 
     private ScrollView scroll;
@@ -49,6 +50,7 @@ public class VocabularyQuiz extends AppCompatActivity {
 
         scroll = (ScrollView) findViewById(R.id.Scroll);
 
+        //getting current ans ids
         question1 = (RadioButton) findViewById(R.id.rb_CorrectAnswerOne);
         question2 = (RadioButton) findViewById(R.id.rb_CorrectAnswerTwo);
         question3 = (RadioButton) findViewById(R.id.rb_CorrectAnswerThree);
@@ -70,6 +72,8 @@ public class VocabularyQuiz extends AppCompatActivity {
     }
 
     public void SubmitResponse(View v) {
+
+        MainActivity.vMarks = 0;
 
         if (question1.isChecked()) {
             MainActivity.vMarks++;
@@ -99,6 +103,7 @@ public class VocabularyQuiz extends AppCompatActivity {
             Toast.makeText(this, "Correct Answers: " + MainActivity.vMarks + "/5", Toast.LENGTH_LONG).show();
         }
 
+        //getting users values and marks and storing them to show in leaderboard
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -109,7 +114,7 @@ public class VocabularyQuiz extends AppCompatActivity {
                         String userDP = dataSnapshot.child(currentUserID).child("profileimage").getValue(String.class);
 
                         QuizMarks quizMarks = new QuizMarks(name, userDP, (MainActivity.vMarks+MainActivity.mMarks));
-
+                        //storing data through the model class
                         quizRef.child(currentUserID).setValue(quizMarks);
                     }
 
@@ -126,6 +131,7 @@ public class VocabularyQuiz extends AppCompatActivity {
 
     }
 
+    //resetting the whole quiz after submitting ans
     public void ResetQuiz() {
 
         radioGroupOne.clearCheck();

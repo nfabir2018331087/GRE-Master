@@ -49,6 +49,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
+//home page of our app
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     boolean isVerified;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //setting different color to our status bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.dark_teal, this.getTheme()));
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -111,17 +113,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        //getSupportActionBar().hide();
-
         setSupportActionBar(toolbar);
 
 
+        //adding navigation drawer to the toolbar
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
     }
 
+    //checking whether user's already logged in or not
+    //if not delivering the user to the login page
     protected void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -135,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void loadData(){
+        //getting data from database and showing them on navigation drawer
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -160,19 +164,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    //listener for side bar's items
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.logout){
+            //logging out while logout button clicked
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
         }
         if(item.getItemId()==R.id.profile){
+            //going to profile page
             Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
             startActivity(intent);
         }
         if(item.getItemId()==R.id.home){
+            //going back to home page
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
             finish();
@@ -181,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             onInviteClicked();
         }
         if(item.getItemId()==R.id.settings){
+            //going to account setting page
             Intent intent = new Intent(getApplicationContext(),Settings.class);
             startActivity(intent);
         }
@@ -188,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    //app invitation to others
     private void onInviteClicked(){
         Intent intent=new AppInviteInvitation.IntentBuilder("GRE Master Invite")
                 .setMessage("Prepare for GRE with GRE Master")
@@ -212,26 +222,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void goToQuiz1(View view) {
+        //going to vocabulary quiz when vocabulary quiz image is clicked
         Intent intent = new Intent(MainActivity.this,VocabularyQuiz.class);
         startActivity(intent);
     }
 
     public void goToQuiz2(View view) {
+        //going to math quiz when math quiz image is clicked
         Intent intent = new Intent(MainActivity.this,MathQuiz.class);
         startActivity(intent);
     }
 
     public void goToForum(View view) {
+        //going to forum when forum image button is clicked
         Intent intent = new Intent(getApplicationContext(),Forum.class);
         startActivity(intent);
     }
 
     public void openLeaderboard(View view) {
+        //going to leaderboard page when leaderboard button is clicked
         Intent intent = new Intent(getApplicationContext(), Leaderboard.class);
         startActivity(intent);
     }
 
     public void goToResource(View view) {
+        //going to resource page when resource button is clicked
         Intent intent = new Intent(getApplicationContext(), ResourceOne.class);
         startActivity(intent);
     }

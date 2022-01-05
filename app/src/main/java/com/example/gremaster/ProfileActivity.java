@@ -27,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+//profile page for showing the user details
 public class ProfileActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -49,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         pPassword = findViewById(R.id.profilePass);
         pStatus = findViewById(R.id.greStatus);
 
+        //setting on click listener on the image to choose image from the gallery
         pImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("users");
         storageRef = FirebaseStorage.getInstance().getReference("profile images");
 
-
+        //getting value from the database and showing them on the profile
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -100,6 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    //storing image in the firebase storage
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -123,6 +126,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    //getting the file extension of the image
     private String getFileExtension(Uri uri){
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();

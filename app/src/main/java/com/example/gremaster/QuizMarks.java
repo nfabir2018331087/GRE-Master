@@ -1,5 +1,6 @@
 package com.example.gremaster;
 
+//model class for storing quiz marks and other user info
 public class QuizMarks {
 
     String name, image;

@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.example.gremaster.Forum;
 
+//adapter class for showing data on recycler view of questions
 public class MyAdapter extends FirebaseRecyclerAdapter<Questions, MyAdapter.QuestionViewHolder> {
 
     boolean likeChecker = false;
@@ -37,7 +38,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Questions, MyAdapter.Ques
     String currentUserID;
     Forum forum;
 
-
+    //recycler view adapter for showing data in the recycler view in the forum
     public MyAdapter(@NonNull FirebaseRecyclerOptions<Questions> options) {
         super(options);
     }
@@ -66,6 +67,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Questions, MyAdapter.Ques
 
         holder.setLikeButtonStatus(postKey);
 
+        //setting up like button functionality
         holder.likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +95,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Questions, MyAdapter.Ques
             }
         });
 
+        //going to answer page when clicked on the comment button
         holder.commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +107,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Questions, MyAdapter.Ques
         });
     }
 
+    //question view holder class
     @NonNull
     @Override
     public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -131,6 +135,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Questions, MyAdapter.Ques
             expertButton = (ImageButton) itemView.findViewById(R.id.expertId);
         }
 
+        //setting up like button status
         public void setLikeButtonStatus(String postKey) {
             likesRef.addValueEventListener(new ValueEventListener() {
 

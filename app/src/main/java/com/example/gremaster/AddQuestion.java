@@ -58,7 +58,7 @@ public class AddQuestion extends AppCompatActivity {
         question= (EditText) findViewById(R.id.question);
         addBtn=(Button) findViewById(R.id.addBtn);
 
-        //Dialogue box for  adding questions
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +67,7 @@ public class AddQuestion extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please write your question.",Toast.LENGTH_LONG).show();
                     return;
                 }
+                //Dialogue box for  adding questions when add button clicked
                 new AlertDialog.Builder(AddQuestion.this)
                         .setMessage("Are you sure you want to post this Question?")
                         .setCancelable(false)
@@ -89,15 +90,10 @@ public class AddQuestion extends AppCompatActivity {
     }
 
     public void addNewQuestion() {
-
-        /*String userQuestion=question.getText().toString();
-
-        if(TextUtils.isEmpty(userQuestion)){
-            Toast.makeText(getApplicationContext(),"Please write your question.",Toast.LENGTH_LONG).show();
-            return;
-        }
-*/      String uQKey = userQuestionRef.push().getKey();
+        String uQKey = userQuestionRef.push().getKey();
         String allQKey = allQuestionRef.push().getKey();
+
+        //this is for getting and setting data in given database location
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -107,6 +103,7 @@ public class AddQuestion extends AppCompatActivity {
                         String name = dataSnapshot.child(currentUserID).child("name").getValue(String.class);
                         String userDP = dataSnapshot.child(currentUserID).child("profileimage").getValue(String.class);
                         String expert = dataSnapshot.child(currentUserID).child("expert").getValue(String.class);
+                        //getting time and date of the question
                         Calendar calForDate = Calendar.getInstance();
                         SimpleDateFormat currentDate = new SimpleDateFormat("dd.MM.yy", Locale.US);
                         final String saveCurrentDate = currentDate.format(calForDate.getTime());
@@ -135,10 +132,10 @@ public class AddQuestion extends AppCompatActivity {
         });
     }
 
+    //going back to forum on back pressing
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         Intent intent = new Intent(getApplicationContext(),Forum.class);
         startActivity(intent);
         finish();

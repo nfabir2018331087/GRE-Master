@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-//Adding answers in forum
+//Adding and showing answers in forum
 public class AnswersActivity extends AppCompatActivity {
 
     RecyclerView answersList;
@@ -47,6 +47,7 @@ public class AnswersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answers);
 
+        //getting the key of the question which I am answering
         String postKey = getIntent().getExtras().get("PostKey").toString();
 
         mAuth = FirebaseAuth.getInstance();
@@ -57,6 +58,7 @@ public class AnswersActivity extends AppCompatActivity {
         allAnsRef= FirebaseDatabase.getInstance().getReference("all questions").child(postKey).child("answers");
         reference = FirebaseDatabase.getInstance().getReference("users");
 
+        //setting up recycler view in a descending order
         answersList = findViewById(R.id.answersList);
         answersList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -67,6 +69,7 @@ public class AnswersActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Answers> options =
                 new FirebaseRecyclerOptions.Builder<Answers>().setQuery(allAnsRef,Answers.class).build();
 
+        //setting adapter class in anslist and passing recycler option
         myAnsAdapter = new MyAnsAdapter(options);
         answersList.setAdapter(myAnsAdapter);
 
@@ -74,7 +77,7 @@ public class AnswersActivity extends AppCompatActivity {
         userAnswer = answer.getText().toString();
         ansBtn = findViewById(R.id.addAns);
 
-        //Dialogue box for answers
+
         ansBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +86,7 @@ public class AnswersActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please write your answer.",Toast.LENGTH_LONG).show();
                     return;
                 }
+                //Dialogue box for adding answers when ansBtn is clicked
                 new AlertDialog.Builder(AnswersActivity.this)
                         .setMessage("Are you sure you want to post this Answer?")
                         .setCancelable(false)
@@ -108,6 +112,7 @@ public class AnswersActivity extends AppCompatActivity {
     private void addNewAnswer() {
         key = currentUserID + Calendar.getInstance().getTime();
 
+        //this is for getting and setting data in given database location
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -117,6 +122,7 @@ public class AnswersActivity extends AppCompatActivity {
                         String name = dataSnapshot.child(currentUserID).child("name").getValue(String.class);
                         String expert = dataSnapshot.child(currentUserID).child("expert").getValue(String.class);
                         String userDP = dataSnapshot.child(currentUserID).child("profileimage").getValue(String.class);
+                        //getting time and date of the answer
                         Calendar calForDate = Calendar.getInstance();
                         SimpleDateFormat currentDate = new SimpleDateFormat("dd.MM.yy", Locale.US);
                         final String saveCurrentDate = currentDate.format(calForDate.getTime());
@@ -157,6 +163,7 @@ public class AnswersActivity extends AppCompatActivity {
         myAnsAdapter.stopListening();
     }
 
+    //going back to forum on back pressing
     @Override
     public void onBackPressed() {
         super.onBackPressed();

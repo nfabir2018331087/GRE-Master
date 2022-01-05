@@ -1,5 +1,8 @@
 package com.example.gremaster;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -11,11 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//changing name and password and deleting account
 public class Settings extends AppCompatActivity {
 
     EditText newName, currentName, newPass, currentPass;
@@ -54,9 +57,11 @@ public class Settings extends AppCompatActivity {
         savePassBtn = findViewById(R.id.savePass);
         delBtn = findViewById(R.id.deleteAC);
 
+        //setting on click listener on the delete button
         delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //dialogue while delete account is clicked
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Settings.this);
                 dialog.setTitle("Are you sure?");
                 dialog.setMessage("Deleting this account will result in completely removing your " +
@@ -71,6 +76,7 @@ public class Settings extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
+                                        //after deletion of the account going back to login page
                                         Toast.makeText(getApplicationContext(), "Account Deleted", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -94,6 +100,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        //getting user value
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,6 +117,7 @@ public class Settings extends AppCompatActivity {
         });
     }
 
+    //when save changes is clicked
     public void saveName(View view) {
         loadingBar.setMessage("Updating.");
         loadingBar.show();
@@ -121,6 +129,7 @@ public class Settings extends AppCompatActivity {
         if(cName.contains(currentUserName)&&!cName.isEmpty()){
             if(!TextUtils.isEmpty(nName)){
                 loadingBar.dismiss();
+                //changing the name
                 reference.child(currentUserID).child("name").setValue(nName);
                 Toast.makeText(getApplicationContext(),"Name Changed Successfully",Toast.LENGTH_SHORT).show();
                 currentName.setText("");
@@ -141,6 +150,7 @@ public class Settings extends AppCompatActivity {
 
     }
 
+    //when save changes clicked after the password part
     public void savePassword(View view) {
         loadingBar.setMessage("Updating.");
         loadingBar.show();
@@ -154,7 +164,34 @@ public class Settings extends AppCompatActivity {
                 if(nPass.length()>=6) {
                     loadingBar.dismiss();
                     reference.child(currentUserID).child("password").setValue(nPass);
-                    Toast.makeText(getApplicationContext(),"Password Changed Successfully",Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    // Get auth credentials from the user for re-authentication
+                    AuthCredential credential = EmailAuthProvider
+                            .getCredential("user@example.com", "password1234");
+
+                    // Prompt the user to re-provide their sign-in credentials
+                    if(user!=null) {
+                        user.reauthenticate(credential)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            user.updatePassword(nPass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getApplicationContext(), "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(), "Password Change Unsuccessful", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                        } else {
+                                        }
+                                    }
+                                });
+                    }
                     currentPass.setText("");
                     newPass.setText("");
                 }else{

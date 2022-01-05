@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+//sign up page
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static boolean x;
@@ -73,14 +74,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    //registering user when clicked on the sign up button
     private void userRegister() {
         String email = emailEditText.getText().toString().trim();
         String password = passEditText.getText().toString().trim();
         String name = nameText.getText().toString().trim();
         String username = userNameText.getText().toString().trim();
         String whiteSpaces = "\\A\\w{4,20}\\z";
-        //  String expert = selButton.getText().toString().trim();
 
+        //checking all the credentials
         if(name.isEmpty()) {
             nameText.setError("Enter your name");
             nameText.requestFocus();
@@ -126,10 +128,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             radioGroup.requestFocus();
             return;
         }
-        /*if(checkValue()){
-            System.out.println("hello there!");
-            return;
-        }*/
+
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -139,6 +138,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if(user!=null) {
+                                //sending verification when sign up button is clicked
                                 user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -170,6 +170,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 });
     }
 
+    //storing given data by the users in the database
     public void saveData(){
         String name = nameText.getText().toString().trim();
         String username = userNameText.getText().toString().trim();
@@ -181,6 +182,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         StoreData storeData = new StoreData(name,username,email,password,expert);
 
+        //storing data through model class
         reference.child(userId).setValue(storeData);
     }
 

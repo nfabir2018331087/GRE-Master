@@ -36,6 +36,7 @@ import org.w3c.dom.Text;
 
 import java.util.Objects;
 
+//login page
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText emailEditText, passEditText;
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         verification = (TextView) findViewById(R.id.verMessage);
         resendButton = (Button) findViewById(R.id.resendButton);
 
+        //adding on click listener to login button and sign up text
         textView.setOnClickListener(this);
         logInButton.setOnClickListener(this);
 
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.textView6){
+            //going to sign up page when sign up text is clicked
             Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
             startActivity(intent);
         }
@@ -103,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         progressBar.setVisibility(View.VISIBLE);
 
+        //logging in with firebase's sign in with email password method
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -111,12 +115,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             user = mAuth.getCurrentUser();
                             if (user != null) {
+                                //checking whether email is verified or not
                                 if (user.isEmailVerified()) {
+                                    //going to home page after logging in
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finish();
                                 } else {
+                                    //having a resend button if verification not working
                                     verification.setVisibility(View.VISIBLE);
                                     resendButton.setVisibility(View.VISIBLE);
                                     Toast.makeText(LoginActivity.this, "Please Verify your email first",
@@ -132,6 +139,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    //resending verification email to user's email address
     public void resendEmail(View view) {
         FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null) {
@@ -152,6 +160,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    //when forgot password text is clicked taking user to reset password
     public void forgotPassLink(View view) {
         String email = emailEditText.getText().toString();
         if(!TextUtils.isEmpty(email)){

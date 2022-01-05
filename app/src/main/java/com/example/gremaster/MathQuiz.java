@@ -1,14 +1,14 @@
 package com.example.gremaster;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//math quiz page
 public class MathQuiz extends AppCompatActivity {
 
     private ScrollView scroll;
@@ -42,6 +43,7 @@ public class MathQuiz extends AppCompatActivity {
 
         scroll = (ScrollView) findViewById(R.id.Scroll);
 
+        //getting correct answers ids
         question1 = (RadioButton) findViewById(R.id.rb_CorrectAnswerOne);
         question2 = (RadioButton) findViewById(R.id.rb_CorrectAnswerTwo);
         question3 = (RadioButton) findViewById(R.id.rb_CorrectAnswerThree);
@@ -94,6 +96,7 @@ public class MathQuiz extends AppCompatActivity {
             Toast.makeText(this, "Correct Answers: " + MainActivity.mMarks + "/5", Toast.LENGTH_LONG).show();
         }
 
+        //getting users values and marks and storing them to show in leaderboard
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -105,6 +108,7 @@ public class MathQuiz extends AppCompatActivity {
 
                         QuizMarks quizMarks = new QuizMarks(name, userDP, (MainActivity.vMarks+MainActivity.mMarks));
 
+                        //storing data through the model class
                         quizRef.child(currentUserID).setValue(quizMarks);
                     }
 
@@ -121,6 +125,7 @@ public class MathQuiz extends AppCompatActivity {
 
     }
 
+    //resetting the whole quiz after submitting ans
     public void ResetQuiz() {
 
         radioGroupOne.clearCheck();

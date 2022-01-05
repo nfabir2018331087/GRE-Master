@@ -30,6 +30,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
+//forum class where all the questions are shown
 public class Forum extends AppCompatActivity implements View.OnClickListener {
 
     public static Activity activity;
@@ -70,11 +71,10 @@ public class Forum extends AppCompatActivity implements View.OnClickListener {
 
         addButton.setOnClickListener(this);
 
-        //DisplayAllQuestion();
-
         FirebaseRecyclerOptions<Questions> options =
                 new FirebaseRecyclerOptions.Builder<Questions>().setQuery(allQuestionRef,Questions.class).build();
 
+        //setting adapter class in recycler view and passing recycler option
         adapter = new MyAdapter(options);
         questionsList.setAdapter(adapter);
 
@@ -94,14 +94,16 @@ public class Forum extends AppCompatActivity implements View.OnClickListener {
         adapter.stopListening();
     }
 
+    //going to add button page when floating button clicked
     @Override
     public void onClick(View v) {
-       if(v.getId()==R.id.addButton){
+        if(v.getId()==R.id.addButton){
             Intent intent = new Intent(getApplicationContext(),AddQuestion.class);
             startActivity(intent);
         }
     }
 
+    //going back to home page on back pressing
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -109,83 +111,4 @@ public class Forum extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
         finish();
     }
-
-    /* public static class QuestionViewHolder extends RecyclerView.ViewHolder{
-        View view;
-        ImageButton likeButton, commentButton;
-        TextView noOfLikes, user, userq, ptime, pdate;
-        ImageView image;
-        int countLikes;
-        String userId;
-        DatabaseReference likeRef;
-        FirebaseAuth mAuth;
-
-        public QuestionViewHolder(@NonNull View itemView) {
-            super(itemView);
-            view = itemView;
-
-            likeButton = (ImageButton) view.findViewById(R.id.like_button);
-            commentButton = (ImageButton) view.findViewById(R.id.comment_button);
-            noOfLikes = (TextView) view.findViewById(R.id.no_likes);
-
-            user = (TextView) view.findViewById(R.id.userName);
-            image = (ImageView) view.findViewById(R.id.userImage);
-            userq = (TextView) view.findViewById(R.id.userQuestion);
-            ptime = (TextView) view.findViewById(R.id.postTime);
-            pdate = (TextView) view.findViewById(R.id.postDate);
-
-            mAuth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            if(currentUser!=null) userId=mAuth.getCurrentUser().getUid();
-
-            likeRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("questions").child("likes");
-        }
-
-        public void setLikeButtonStatus(final String PostKey){
-            likeRef.addValueEventListener(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child(PostKey).hasChild(userId)){
-                        countLikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        likeButton.setImageResource(R.drawable.ic_baseline_thumb_up_alt_24);
-
-                        noOfLikes.setText((Integer.toString(countLikes)+(" Likes")));
-                    }
-                    else {
-                        countLikes = (int) dataSnapshot.child(PostKey).getChildrenCount();
-                        likeButton.setImageResource(R.drawable.ic_baseline_thumb_up_off_alt_24);
-
-                        noOfLikes.setText((Integer.toString(countLikes)+(" Likes")));
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
-
-       /* public void setUsername(String username){
-            TextView u = (TextView) view.findViewById(R.id.userName);
-            u.setText(username);
-        }
-        public void setProfileImage(String profileImage) {
-            ImageView image = (ImageView) view.findViewById(R.id.userImage);
-            Picasso.get().load(profileImage).into(image);
-        }
-        public void setQuestion(String question) {
-            TextView userq = (TextView) view.findViewById(R.id.userQuestion);
-            userq.setText(question);
-        }
-        public void setTime(String time){
-            TextView ptime = (TextView) view.findViewById(R.id.postTime);
-            ptime.setText(time);
-        }
-        public void setDate(String date){
-            TextView pdate = (TextView) view.findViewById(R.id.postDate);
-            pdate.setText(date);
-        }
-    }*/
 }

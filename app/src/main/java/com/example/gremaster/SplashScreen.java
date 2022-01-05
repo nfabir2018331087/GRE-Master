@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+//splash screen. it is shown when app is opening
 public class SplashScreen extends AppCompatActivity {
 
     @Override
@@ -13,8 +14,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        //getSupportActionBar().hide();
-
+        //going to home page after this, it stays for 2 seconds
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

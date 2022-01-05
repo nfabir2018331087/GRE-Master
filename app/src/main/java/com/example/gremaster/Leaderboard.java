@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
+//making leaderboard with quiz marks
 public class Leaderboard extends AppCompatActivity {
 
     RecyclerView userList;
@@ -41,10 +42,10 @@ public class Leaderboard extends AppCompatActivity {
         if(currentUser!=null) currentUserID=mAuth.getCurrentUser().getUid();
         reference = FirebaseDatabase.getInstance().getReference("users");
         quizRef = FirebaseDatabase.getInstance().getReference("quiz marks");
+        //setting query order according to the marks
         Query query = quizRef.orderByChild("marks");
 
-
-
+        //setting up the recycler view in a descending order
         userList = findViewById(R.id.userList);
         userList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -54,7 +55,10 @@ public class Leaderboard extends AppCompatActivity {
 
         options = new FirebaseRecyclerOptions.Builder<QuizMarks>().setQuery(query,QuizMarks.class).build();
 
+        //recycler adapter which we use to show item in the recycler view
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<QuizMarks, UserViewHolder>(options) {
+
+            //creating and binding item in a design layout with view holder class
             @Override
             protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull QuizMarks model) {
                 String marks = Integer.toString(model.getMarks());
@@ -77,18 +81,21 @@ public class Leaderboard extends AppCompatActivity {
 
     }
 
+    //Starting Recycler view adapter on start
     @Override
     protected void onStart() {
         super.onStart();
         firebaseRecyclerAdapter.startListening();
     }
 
+    //Stopping Recycler view adapter on stop
     @Override
     protected void onStop() {
         super.onStop();
         firebaseRecyclerAdapter.stopListening();
     }
 
+    //view holder class
     public static class UserViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
