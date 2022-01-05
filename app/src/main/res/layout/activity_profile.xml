@@ -8,6 +8,26 @@
     android:orientation="vertical"
     android:background="@drawable/profilebg">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/balthazar"
+        android:gravity="center"
+        android:text="My Profile"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/black" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"

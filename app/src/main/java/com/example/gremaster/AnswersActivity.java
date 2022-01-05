@@ -115,7 +115,7 @@ public class AnswersActivity extends AppCompatActivity {
                     if(currentUserID!=null) {
                         //Fetching data from users
                         String name = dataSnapshot.child(currentUserID).child("name").getValue(String.class);
-                        //String username = dataSnapshot.child(currentUserID).child("username").getValue(String.class);
+                        String expert = dataSnapshot.child(currentUserID).child("expert").getValue(String.class);
                         String userDP = dataSnapshot.child(currentUserID).child("profileimage").getValue(String.class);
                         Calendar calForDate = Calendar.getInstance();
                         SimpleDateFormat currentDate = new SimpleDateFormat("dd.MM.yy", Locale.US);
@@ -125,7 +125,7 @@ public class AnswersActivity extends AppCompatActivity {
                         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm", Locale.US);
                         final String saveCurrentTime = currentTime.format(calForTime.getTime());
 
-                        Answers answers = new Answers(name, userDP, userAnswer, saveCurrentTime, saveCurrentDate);
+                        Answers answers = new Answers(name, userDP, userAnswer, saveCurrentTime, saveCurrentDate, expert);
 
                         answers.setKey(key);
 

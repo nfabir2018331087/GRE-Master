@@ -79,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String name = nameText.getText().toString().trim();
         String username = userNameText.getText().toString().trim();
         String whiteSpaces = "\\A\\w{4,20}\\z";
-      //  String expert = selButton.getText().toString().trim();
+        //  String expert = selButton.getText().toString().trim();
 
         if(name.isEmpty()) {
             nameText.setError("Enter your name");

@@ -22,6 +22,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     boolean isVerified;
     final static int GALLERY_PICK = 1;
+    static int vMarks, mMarks;
     String userId, email;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -143,8 +145,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String image = snapshot.child(userId).child("profileimage").getValue(String.class);
 
                         navName.setText(name);
-                        if(expert.contains("Yes")) navStatus.setText("Expert");
-                        else navStatus.setText("Learner");
+                        if(expert!=null) {
+                            if (expert.contains("Yes")) navStatus.setText("Expert");
+                            else navStatus.setText("Learner");
+                        }
                         Picasso.get().load(image).placeholder(R.drawable.default2).into(navImage);
                     }
                 }
@@ -176,6 +180,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getItemId()==R.id.share){
             onInviteClicked();
         }
+        if(item.getItemId()==R.id.settings){
+            Intent intent = new Intent(getApplicationContext(),Settings.class);
+            startActivity(intent);
+        }
         drawerLayout.closeDrawer(GravityCompat.START);
         return super.onOptionsItemSelected(item);
     }
@@ -203,8 +211,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void quizButtonClicked(View view) {
+    public void goToQuiz1(View view) {
         Intent intent = new Intent(MainActivity.this,VocabularyQuiz.class);
+        startActivity(intent);
+    }
+
+    public void goToQuiz2(View view) {
+        Intent intent = new Intent(MainActivity.this,MathQuiz.class);
         startActivity(intent);
     }
 
@@ -217,4 +230,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(getApplicationContext(), Leaderboard.class);
         startActivity(intent);
     }
+
+    public void goToResource(View view) {
+        Intent intent = new Intent(getApplicationContext(), ResourceOne.class);
+        startActivity(intent);
+    }
+
 }

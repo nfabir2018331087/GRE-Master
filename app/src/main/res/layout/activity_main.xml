@@ -33,29 +33,71 @@
             android:text="@string/quiz"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginStart="10dp"
+            android:gravity="center"
             android:textColor="@color/white"/>
 
-        <ImageButton
-            android:id="@+id/vocButton1"
-            android:layout_width="170dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/voc"
-            android:layout_marginStart="10dp"
-            android:onClick="quizButtonClicked"
-            android:scaleType="fitXY"
-            android:backgroundTint="@color/white"/>
-
-        <TextView
-            android:layout_width="170dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:text="@string/voc"
-            android:fontFamily="@font/balthazar"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp">
+
+                <ImageButton
+                    android:id="@+id/vocButton1"
+                    android:layout_width="170dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/voc"
+                    android:layout_gravity="center"
+                    android:onClick="goToQuiz1"
+                    android:scaleType="fitXY"
+                    android:backgroundTint="@color/white"/>
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Vocabulary Quiz"
+                    android:fontFamily="@font/balthazar"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp">
+
+                <ImageButton
+                    android:id="@+id/vocButton2"
+                    android:layout_width="170dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/mathquiz"
+                    android:layout_gravity="center"
+                    android:onClick="goToQuiz2"
+                    android:scaleType="fitXY"
+                    android:backgroundTint="@color/white"/>
+
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Math Quiz"
+                    android:fontFamily="@font/balthazar"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
 
 
         <TextView
@@ -63,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
+            android:gravity="center"
             android:text="@string/forum"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -105,14 +147,18 @@
                 android:text="Leaderboard"
                 android:textSize="15sp"
                 android:layout_marginEnd="30dp"
-                android:onClick="openLeaderboard"/>
+                android:onClick="openLeaderboard"
+                android:backgroundTint="@color/dark_teal"/>
+
             <Button
                 android:id="@+id/recourceButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:text="Resources"
-                android:layout_marginStart="30dp"/>
+                android:onClick="goToResource"
+                android:layout_marginStart="30dp"
+                android:backgroundTint="@color/dark_teal"/>
 
         </LinearLayout>
 

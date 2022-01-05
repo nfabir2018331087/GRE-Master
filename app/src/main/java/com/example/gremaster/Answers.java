@@ -4,16 +4,17 @@ package com.example.gremaster;
 //Model class for storing answers in forum
 public class Answers {
 
-    private String name, profileImage, answer, time, date, key;
+    private String name, profileImage, answer, time, date, key, status;
     public Answers(){
 
     }
-    public Answers(String name, String profileImage, String answer, String time, String date) {
+    public Answers(String name, String profileImage, String answer, String time, String date, String status) {
         this.name = name;
         this.profileImage = profileImage;
         this.answer = answer;
         this.time = time;
         this.date = date;
+        this.status = status;
     }
 
     public String getName() {
@@ -62,5 +63,13 @@ public class Answers {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

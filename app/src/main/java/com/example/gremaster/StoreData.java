@@ -56,5 +56,4 @@ public class StoreData {
     public void setExpert(String expert) {
         this.expert = expert;
     }
-
 }

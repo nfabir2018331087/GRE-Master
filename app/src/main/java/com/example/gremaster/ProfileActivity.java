@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
-             currentUid = currentUser.getUid();
+            currentUid = currentUser.getUid();
         }
         reference = FirebaseDatabase.getInstance().getReference("users");
         storageRef = FirebaseStorage.getInstance().getReference("profile images");
@@ -81,8 +81,10 @@ public class ProfileActivity extends AppCompatActivity {
                         String password = snapshot.child(currentUid).child("password").getValue(String.class);
                         String image = snapshot.child(currentUid).child("profileimage").getValue(String.class);
 
-                        if(expert.contains("Yes")) pStatus.setText("Expert");
-                        else pStatus.setText("Not Expert");
+                        if(expert!=null) {
+                            if (expert.contains("Yes")) pStatus.setText("Expert");
+                            else pStatus.setText("Not Expert");
+                        }
                         pName.setText(name);
                         pUsername.setText(username);
                         pEmail.setText(email);
