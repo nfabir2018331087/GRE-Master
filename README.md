@@ -27,10 +27,12 @@ Acknowledgement
    Basic of Android Studio and Firebase
 * **CodeWithHarry** (*[Youtube link](https://youtu.be/mXjZQX3UzOs)*)  
    Basic of Android Studio
-* **Rajjan Sharma** (*[Youtube playlist](https://www.youtube.com/playlist?list=PL2dkge6Cz_wkhe4ygVRRPGIif5nEgnmDz)*)  
+* **Rajjan Sharma** (*[Youtube link](https://www.youtube.com/watch?v=8tAn8cfoAE4&t=684s&ab_channel=RajjanSharma)*)  
    Functionality of Firebase Recycler Adapter
 * **Coding With Tea** (*[Youtube playlist](https://www.youtube.com/playlist?list=PL5jb9EteFAOD_Tz2dPlsw-1ViOmM57txh)*)  
    Data Retrieving and Image Showing
+* **Stack Overflow** (*[Website](https://stackoverflow.com/)*)  
+   Loads of Bug fixing
    
 Developers
 -----------
