@@ -31,7 +31,7 @@ There is also a Sidebar.
 
 <img src="Question.jpg" width="200" height="400"> <img src="Answer.jpg" width="200" height="400">
 
-Other than these features there is a leaderboard based on the quizzes.  
+There is a also a leaderboard based on the quizzes.  
 
 <img src="Leaderboard.jpg" width="200" height="400">
 
