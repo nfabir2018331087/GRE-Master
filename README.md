@@ -22,9 +22,18 @@ SL | Learning Task | Description | Status | Comment |
 4  | Firebase | Database and API |![ ](https://img.shields.io/badge/Firebase-June%2030-red) | |
 
 Acknowledgement
-----------------
-* 
-
+----------------  
+* **edureka!** (*[Youtube link](https://www.youtube.com/watch?v=aS__9RbCyHg&t=13373s&ab_channel=edureka%21)*)  
+   Introduction to Android Developement  
+* **Anisul Islam** (*[Youtube playlist](https://www.youtube.com/playlist?list=PLgH5QX0i9K3p9xzYLFGdfYliIRBLVDRV5)*)  
+   Basic of Android Studio and Firebase
+* **CodeWithHarry** (*[Youtube link](https://youtu.be/mXjZQX3UzOs)*)  
+   Basic of Android Studio
+* **Coding With Tea** (*[Youtube playlist](https://www.youtube.com/playlist?list=PL5jb9EteFAOD_Tz2dPlsw-1ViOmM57txh)*)  
+   Data Retrieving and Image Showing
+* **Stack Overflow** (*[Website](https://stackoverflow.com/)*)  
+   Loads of Bug fixing
+   
 Developers
 -----------
 **Group Number:** 33  
