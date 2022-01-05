@@ -24,10 +24,14 @@ SL | Learning Task | Description | Status | Comment |
 Acknowledgement
 ----------------
 * **Anisul Islam** (*[Youtube playlist](https://www.youtube.com/playlist?list=PLgH5QX0i9K3p9xzYLFGdfYliIRBLVDRV5)*)  
-   Basic of Android Studio
+   Basic of Android Studio and Firebase
 * **CodeWithHarry** (*[Youtube link](https://youtu.be/mXjZQX3UzOs)*)  
    Basic of Android Studio
-
+* **Rajjan Sharma** (*[Youtube playlist](https://www.youtube.com/playlist?list=PL2dkge6Cz_wkhe4ygVRRPGIif5nEgnmDz)*)
+   Functionality of Firebase Recycler Adapter
+* **Coding With Tea** (*[Youtube playlist](https://www.youtube.com/playlist?list=PL5jb9EteFAOD_Tz2dPlsw-1ViOmM57txh)*)
+   Data Retrieving and Image Showing
+   
 Developers
 -----------
 **Group Number:** 33  
