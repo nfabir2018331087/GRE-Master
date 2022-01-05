@@ -14,8 +14,14 @@ Then open the project from android studio. Wait some times for Gradle to sync up
 which is a virtual emulator where you can install and run this app. Sometimes AVD doesn't work properly(As we've faced), you can connect your phone to your pc and run on it.  
 To install and run this project on your phone you need to turn on your USB Debugging option of your phone, which you will find in Settings>Developer options(May vary in different device). And also running android project on your phone is a lot less heavier than running on AVD as android studio itself is a very heavy software.  
 
+For storing data we have used Firebase as a database. Realtime database, Firebase storage, Cloud Messaging are the elements we used from firebase.
+
 
 ## FAQ:  
+### Q1: Why this project isn't running on my PC?  
+Ans: This can be happen for some issues. First let the project sync up completely after opening. Dependencies can be outdated as we have used Picasso, FirebaseUI and etc. So, update them to the latest versions.  
+### Q2: Why can't I login or signup?  
+Ans: As we have faced this sometimes too, it's probably because of the selected API version of the AVD. Try to run the project on your phone and keep your internet connection on.
 
 
 
