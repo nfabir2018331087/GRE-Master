@@ -7,6 +7,8 @@ Feature Description
 * *Daily Vocabulary Dose:* Users will recieve a notification with a new vocabulary word everyday if they want.
 * *Discussion Forum:* Users can be engaged in discussion of GRE related topics and inquiries.
 
+Here is the [description](description.md) of our project. And here are some [instructions](instructions.md) to run this project on your device.
+
 Expected Timeline
 ------------------
 ![Gantt Chart](gantt_chart.JPG)
